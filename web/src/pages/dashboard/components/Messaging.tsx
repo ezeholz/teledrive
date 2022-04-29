@@ -334,7 +334,7 @@ const Messaging: React.FC<Props> = ({ me, collapsed, parent, setCollapsed }) => 
     const { data: files } = await req.get('/files', { params: { forward_info: forwardKey } })
     if (files?.files?.[0]) {
       const file = files?.files?.[0]
-      return history.push(`/view/${file.id}`)
+      return history.push(`${process.env.PUBLIC_URL || window.location.origin}/view/${file.id}`)
     }
 
     const { data: file } = await req.post('/files', { file:
