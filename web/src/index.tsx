@@ -9,8 +9,8 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 
 ReactDOM.render(
-  <ThemeSwitcherProvider defaultTheme="dark" themeMap={{ light: '/app.css', dark: '/app.dark.css' }}>
-    <BrowserRouter>
+  <ThemeSwitcherProvider defaultTheme="dark" themeMap={{ light: process.env.PUBLIC_URL+'/app.css', dark: process.env.PUBLIC_URL+'/app.dark.css' }}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <App />
     </BrowserRouter>
   </ThemeSwitcherProvider>,

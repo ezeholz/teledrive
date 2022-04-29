@@ -49,7 +49,7 @@ const Share: React.FC<Props> = ({
         message: 'Hey, please check this out! 👆',
         public: isPublic,
         sharing_options: selectShare.row.sharing_options?.length ? selectShare.row.sharing_options.filter((opt: string) => opt !== '*') : [''],
-        link: `${window.location.origin}/view/${selectShare.row.id}`,
+        link: `${process.env.PUBLIC_URL || window.location.origin}/view/${selectShare.row.id}`,
         username: null
       })
     } else {

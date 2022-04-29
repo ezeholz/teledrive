@@ -31,7 +31,7 @@ const Navbar: React.FC<Props> = ({ user }) => {
     <Layout.Header style={{ background: currentTheme === 'dark' ? '#1f1f1f' : '#0088CC', padding: '0 20px' }}>
       <div key="logo" className="logo" style={{ marginRight: '30px' }}>
         <Link to="/dashboard" style={{ color: '#fff' }}>
-          <img src="/teledrive-logo/logoteledrive-white.png" style={{ height: '24px' }} />
+          <img src={`${process.env.PUBLIC_URL}/teledrive-logo/logoteledrive-white.png`} style={{ height: '24px' }} />
         </Link>
       </div>
       {user ? <>{/\/dashboard/.test(pathname) || /\/settings/.test(pathname) || /\/admin/.test(pathname) ? <>

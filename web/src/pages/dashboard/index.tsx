@@ -418,7 +418,7 @@ const Dashboard: React.FC<PageProps & { me?: any, errorMe?: any }> = ({ match })
                   // const searchParams = new URLSearchParams(window.location.search)
                   // searchParams.set('view', row.id)
                   // history.push(`${window.location.pathname}?${searchParams.toString()}`)
-                  window.open(`${window.location.origin}/view/${row.id}`, '_blank')
+                  window.open(`${process.env.PUBLIC_URL || window.location.origin}/view/${row.id}`, '_blank')
 
                   // setCollapsedView(row.id)
                 }
