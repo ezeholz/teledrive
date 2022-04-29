@@ -100,7 +100,7 @@ const TableFiles: React.FC<Props> = ({ me, data }) => {
       searchParams.set('parent', row.id)
       return history.push(`${location.pathname}?${searchParams.toString()}`)
     } else {
-      return history.push(`/view/${row.id}`)
+      return history.push(`${process.env.PUBLIC_URL || window.location.origin}/view/${row.id}`)
     }
   }
 

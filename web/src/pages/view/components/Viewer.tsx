@@ -61,7 +61,7 @@ const Viewer: React.FC<Props> = ({ data, me, error, mutate, pageParams, isInDraw
       setLinks({
         raw: `${process.env.REACT_APP_API_URL || window.location.origin}/api/v1/files/${pageParams.id}?raw=1&password=${sessionStorage.getItem(`pass-${pageParams.id}`)}`,
         download: `${process.env.REACT_APP_API_URL || window.location.origin}/api/v1/files/${pageParams.id}?raw=1&dl=1&password=${sessionStorage.getItem(`pass-${pageParams.id}`)}`,
-        share: `${window.location.origin}/view/${pageParams.id}`
+        share: `${process.env.PUBLIC_URL || window.location.origin}/view/${pageParams.id}`
       })
       // setBlobURL(undefined)
 

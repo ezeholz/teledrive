@@ -18,7 +18,7 @@ const Footer: React.FC<Props> = () => {
             <Col md={8} sm={12} span={24} style={{ marginBottom: '30px' }}>
               <Typography.Paragraph>
                 <Button type="link" href="/" style={{ fontSize: '20px', fontWeight: 'bolder' }}
-                  icon={<img src={currentTheme === 'dark' ? '/teledrive-logo/logoteledrive-white.png' : '/teledrive-logo/logoteledrive.png'} style={{ height: '24px' }} />}>
+                  icon={<img src={currentTheme === 'dark' ? `${process.env.PUBLIC_URL}/teledrive-logo/logoteledrive-white.png` : `${process.env.PUBLIC_URL}/teledrive-logo/logoteledrive.png`} style={{ height: '24px' }} />}>
                 </Button>
               </Typography.Paragraph>
               <Typography.Paragraph type="secondary">
