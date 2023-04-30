@@ -165,7 +165,7 @@ const Viewer: React.FC<Props> = ({ data, me, error, mutate, pageParams, isInDraw
     <Layout style={{ minHeight: '100vh', overflow: 'hidden', background: '#2a2a2a', color: 'rgb(251,251,254)' }}>
       <Layout.Content>
         {data?.file.type === 'image'
-          ? <img style={{ maxHeight: '100%', maxWidth: '100%', position: 'absolute', margin: 'auto', top: 0, right: 0, bottom: 0, left: 0, imageOrientation: 'from-image' }} src={links?.raw} />
+          ? <img style={{ maxHeight: '100%', maxWidth: '100%', position: 'relative', margin: 'auto', top: '50%', right: '50%', bottom: '50%', left: '50%', imageOrientation: 'from-image' }} src={links?.raw} />
           : data?.file.type === 'video'
             ? <ReactPlayer url={links?.raw} controls width='100%' height='100%' playing />
             : <iframe onLoad={(e: any) => {
