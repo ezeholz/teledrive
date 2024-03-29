@@ -19,7 +19,9 @@ import {
   ExportOutlined,
   SkinOutlined,
   SyncOutlined,
-  WarningOutlined
+  WarningOutlined,
+  LockOutlined,
+  UnlockOutlined
 } from '@ant-design/icons'
 import {
   Avatar,
@@ -43,6 +45,7 @@ import {
   Typography,
   Upload
 } from 'antd'
+import bigInt from 'big-integer'
 import { useForm } from 'antd/es/form/Form'
 import prettyBytes from 'pretty-bytes'
 import pwaInstallHandler from 'pwa-install-handler'
@@ -68,6 +71,7 @@ const Settings: React.FC<Props> = ({ me, mutate, error }) => {
   const [logoutConfirmation, setLogoutConfirmation] = useState<boolean>(false)
   const [removeConfirmation, setRemoveConfirmation] = useState<boolean>(false)
   const [expFeatures, setExpFeatures] = useState<boolean>(false)
+  const [encryptData, setEncryptData] = useState<boolean>(false)
   const [loadingChangeServer, setLoadingChangeServer] = useState<boolean>(false)
   const [loadingRemove, setLoadingRemove] = useState<boolean>(false)
   const [destroySession, setDestroySession] = useState<boolean>(false)
@@ -344,6 +348,18 @@ const Settings: React.FC<Props> = ({ me, mutate, error }) => {
               </List>
 
               <List header="Danger Zone">
+                <List.Item key="encrypt-data" actions={[<Form.Item>
+                  <Button shape="round" icon={localStorage.getItem('encryptionPassword') ? <UnlockOutlined /> : <LockOutlined />} onClick={async () => {
+                    if (localStorage.getItem('encryptionPassword')) {
+                      localStorage.removeItem('encryptionPassword')
+                    } else {
+                      setEncryptData(true)
+                    }
+                  }}>{localStorage.getItem('encryptionPassword') ? 'Clear Decrypt' : 'Encrypt'}</Button>
+                </Form.Item>]}>
+                  <List.Item.Meta title={<Space><MonitorOutlined /><>Report Bug</></Space>} description="Send your activities for reporting" />
+                </List.Item>
+
                 <List.Item key="join-exp" actions={[<Form.Item>
                   <Button shape="round" icon={localStorage.getItem('experimental') && localStorage.getItem('session') ? <LogoutOutlined /> : <LoginOutlined />} onClick={async () => {
                     if (localStorage.getItem('experimental') && localStorage.getItem('session')) {
@@ -449,6 +465,27 @@ const Settings: React.FC<Props> = ({ me, mutate, error }) => {
           Send an email to <a href={emailLink()}>bug@teledriveapp.com</a> with logs and additional screenshots in the attachment
         </li>
       </ol>
+    </Modal>
+
+    <Modal title={<Typography.Text>
+      <Typography.Text><InfoOutlined /></Typography.Text> Encrypt data
+    </Typography.Text>}
+    visible={encryptData}
+    onCancel={() => {
+      setEncryptData(false)
+    }}
+    onOk={() => {
+      localStorage.setItem('encryptionPassword', crypto.randomUUID?crypto.randomUUID():bigInt.randBetween('-1e100', '1e100').toString())
+      setEncryptData(false)
+    }}
+    cancelButtonProps={{ shape: 'round' }}
+    okButtonProps={{ warning: true, type: 'primary', shape: 'round' }}>
+      <Typography.Paragraph>
+        Are you sure that you want to encrypt your following data?
+      </Typography.Paragraph>
+      <Typography.Paragraph type="secondary">
+        Remember that you'll no longer be able to access the file if you lost the key.
+      </Typography.Paragraph>
     </Modal>
 
     <Modal title={<Typography.Text>
